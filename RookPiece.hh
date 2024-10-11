@@ -11,6 +11,9 @@ namespace Student
 {
     class RookPiece : public ChessPiece
     {
+    private:
+        
+    public:
     };
 }
 

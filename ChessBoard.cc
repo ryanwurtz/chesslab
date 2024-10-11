@@ -46,3 +46,35 @@ std::ostringstream ChessBoard::displayBoard()
 
     return outputString;
 }
+
+//constructor
+ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece*>(numCols,nullptr)) { }
+
+//createChessPiece
+void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
+    ChessPiece* piece;
+    if (ty==Rook) {piece = new RookPiece(col,startRow,startColumn);}   
+    else if (ty==Bishop) {piece = new BishopPiece(col,startRow,startColumn);}
+    else if (ty==Pawn) {piece = new PawnPiece(col,startRow,startColumn);}
+    //add king in later
+    if (board[startRow][startColumn] != NULL) {delete board[startRow][startColumn];}
+    board[startRow][startColumn] = piece;
+}
+
+//movePiece
+bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+    //dummy part 1
+    return true;
+}
+
+//isValidMove
+bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+
+}
+
+//isPieceUnderThreat
+bool ChessBoard::isPieceUnderThreat(int row, int column) {
+    //dummy part 1
+    return true;
+}
+
