@@ -105,6 +105,8 @@ namespace Student
          */
         bool isValidMove(int fromRow, int fromColumn, int toRow, int toColumn);
 
+        bool obstructed(int fromRow,int fromColumn,int toRow,int toColumn);
+
         /**
          * @brief
          * Checks if the piece at a position is under threat.

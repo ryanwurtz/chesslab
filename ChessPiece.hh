@@ -9,7 +9,13 @@
 
   class ChessPiece
   {
+  private:
+    Color color;
+    int row;
+    int column;
   public:
+    ChessBoard &board;
+    
     /**
      * @brief
      * Constructor for ChessPiece.

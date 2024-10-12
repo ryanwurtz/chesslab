@@ -52,24 +52,62 @@ ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol
 
 //createChessPiece
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
+    ChessBoard &boardref = *this;
     ChessPiece* piece;
-    if (ty==Rook) {piece = new RookPiece(col,startRow,startColumn);}   
-    else if (ty==Bishop) {piece = new BishopPiece(col,startRow,startColumn);}
-    else if (ty==Pawn) {piece = new PawnPiece(col,startRow,startColumn);}
+    if (ty==Rook) {piece = new RookPiece(boardref,col,startRow,startColumn);}   
+    else if (ty==Bishop) {piece = new BishopPiece(boardref,col,startRow,startColumn);}
+    else if (ty==Pawn) {piece = new PawnPiece(boardref,col,startRow,startColumn);}
     //add king in later
-    if (board[startRow][startColumn] != NULL) {delete board[startRow][startColumn];}
+    if (board[startRow][startColumn] != nullptr) {delete board[startRow][startColumn];}
     board[startRow][startColumn] = piece;
 }
 
 //movePiece
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
-    //dummy part 1
+    //checking if the move is valid
+    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
+    if (!isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
+
+    //moving piece and handling memory if valid
+    delete board[toRow][toColumn];
+    ChessPiece *temp= board[fromRow][fromColumn];
+    board[toRow][toColumn] = temp;
+    board[fromRow][fromColumn] = nullptr; 
     return true;
+}
+
+//obstructed
+bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
+    //defining row/column movers
+    int r= (toRow<fromRow) ? -1: (toRow>fromRow) ? 1: 0;
+    int c= (toColumn>fromColumn) ? 1: (toColumn<fromColumn) ? -1: 0;
+    //defining start positions (not piece position)
+    int cr= fromRow+r;
+    int cc= fromColumn+c; 
+    //iterating through the path
+    while ((cr!=toRow) && (cc!=toColumn)) {
+        if (board[cr][cc]!=nullptr) {return true;}
+        cr+=r;
+        cc+=c;
+    }
+    return false;
 }
 
 //isValidMove
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+    //is the new location different
+    if (fromRow == toRow && fromColumn == toColumn) {return false;}
+    //is row or column of desired move out of bounds
+    try {board.at(toRow).at(toColumn);}
+    catch (const std::out_of_range& ex) {return false;}
+    //does the new location have a piece of the same color
+    if (board[fromRow][fromColumn]->getColor()==board[toRow][toColumn]->getColor()) {return false;}
+    //is move valid for specific piece type
+    if (!board[fromRow][fromColumn]->canMoveToLocation(toRow,toColumn)) {return false;}
+    //are there any obstructions
+    if (obstructed) {return false;}
 
+    return true;
 }
 
 //isPieceUnderThreat

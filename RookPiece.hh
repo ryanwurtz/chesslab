@@ -16,7 +16,6 @@ namespace Student
     public:
         RookPiece(ChessBoard &board, Color color, int row, int column);
         ~RookPiece();
-        virtual void setPosition(int row, int column);
         virtual bool canMoveToLocation(int toRow, int toColumn);
         virtual const char *toString();
     };
