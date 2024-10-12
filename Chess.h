@@ -14,11 +14,4 @@ enum Type
     King,
 };
 
-class iterator {
-public:
-    bool operator!=(const iterator& other);
-    int& operator*();
-    iterator& operator++();
-};
-
 #endif

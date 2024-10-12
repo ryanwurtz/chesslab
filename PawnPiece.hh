@@ -11,11 +11,9 @@ namespace Student
 {
     class PawnPiece : public ChessPiece
     {
-    private:
-        Type type = Pawn;
     public:
         PawnPiece(ChessBoard &board, Color color, int row, int column);
-        ~PawnPiece();
+        virtual ~PawnPiece();
         virtual bool canMoveToLocation(int toRow, int toColumn);
         virtual const char *toString();
     };

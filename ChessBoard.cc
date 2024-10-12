@@ -47,10 +47,8 @@ std::ostringstream ChessBoard::displayBoard()
     return outputString;
 }
 
-//constructor
-ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece*>(numCols,nullptr)) { }
+ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece*>(numCols,nullptr)) {}
 
-//createChessPiece
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
     ChessBoard &boardref = *this;
     ChessPiece* piece;
@@ -62,7 +60,6 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
     board[startRow][startColumn] = piece;
 }
 
-//movePiece
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
     //checking if the move is valid
     if (turn != board[fromRow][fromColumn]->getColor()) {return false;}

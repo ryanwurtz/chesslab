@@ -15,7 +15,6 @@
     int column;
   public:
     ChessBoard &board;
-    
     /**
      * @brief
      * Constructor for ChessPiece.
