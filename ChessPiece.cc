@@ -8,12 +8,6 @@ ChessPiece::~ChessPiece() { }
 
 Color ChessPiece::getColor() {return color;}
 
-Type ChessPiece::getType() {
-    if (PawnPiece *p = dynamic_cast<PawnPiece*>(this)!=nullptr) {return Pawn;} 
-    else if (RookPiece *r = dynamic_cast<RookPiece*>(this)!=nullptr) {return Rook;} 
-    return Bishop;
- }
-
 int ChessPiece::getRow() {return row;}
 
 int ChessPiece::getColumn() {return column;}

@@ -11,9 +11,12 @@ namespace Student
 {
     class BishopPiece : public ChessPiece
     {
+    private:
+        Type type = Bishop;
     public:
         BishopPiece(ChessBoard &board, Color color, int row, int column);
         virtual ~BishopPiece();
+        virtual Type getType();
         virtual bool canMoveToLocation(int toRow, int toColumn);
         virtual const char *toString();
     };

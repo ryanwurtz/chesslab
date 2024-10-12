@@ -63,7 +63,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
     //checking if the move is valid
     if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
-    if (!isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
+    if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
 
     //moving piece and handling memory if valid
     delete board[toRow][toColumn];
@@ -73,7 +73,6 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     return true;
 }
 
-//obstructed
 bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
     //defining row/column movers
     int r= (toRow<fromRow) ? -1: (toRow>fromRow) ? 1: 0;
@@ -90,7 +89,6 @@ bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
     return false;
 }
 
-//isValidMove
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     //is the new location different
     if (fromRow == toRow && fromColumn == toColumn) {return false;}
@@ -102,12 +100,11 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     //is move valid for specific piece type
     if (!board[fromRow][fromColumn]->canMoveToLocation(toRow,toColumn)) {return false;}
     //are there any obstructions
-    if (obstructed) {return false;}
+    if (this->obstructed(fromRow,fromColumn,toRow,toColumn)) {return false;}
 
     return true;
 }
 
-//isPieceUnderThreat
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
     //dummy part 1
     return true;

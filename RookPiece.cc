@@ -6,10 +6,12 @@ RookPiece::RookPiece(ChessBoard &board, Color color, int row, int column) : Ches
 
 RookPiece::~RookPiece() { }
 
+Type RookPiece::getType() {return type;}
+
 bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
-    Color color = getColor();
-    int row = getRow();
-    int column = getColumn();
+    Color color = this->getColor();
+    int row = this->getRow();
+    int column = this->getColumn();
 
     //checking if move horizontal or vertical
     if (row != toRow && column != toColumn) {return false;}
@@ -18,7 +20,7 @@ bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
 }
 
 const char *RookPiece::toString() {
-    if (getColor() == Black) {return "\u265C"}
-    else {return "\u2656"}
+    if (this->getColor() == Black) {return "\u265C";}
+    return "\u2656";
 
 }

@@ -6,10 +6,12 @@ BishopPiece::BishopPiece(ChessBoard &board, Color color, int row, int column) : 
 
 BishopPiece::~BishopPiece() { }
 
+Type BishopPiece::getType() {return type;}
+
 bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
-    Color color = getColor();
-    int row = getRow();
-    int column = getColumn();
+    Color color = this->getColor();
+    int row = this->getRow();
+    int column = this->getColumn();
 
     //checking if move is diagonal
     if ((toRow-row != toColumn-column) && (toRow-row != column-toColumn)) {return false;}
@@ -18,6 +20,6 @@ bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
 }
 
 const char *BishopPiece::toString() {
-    if (getColor() == Black) {return "\u265D"}
-    else {return "\u2657"}
+    if (this->getColor() == Black) {return "\u265D";}
+    return "\u2657";
 }

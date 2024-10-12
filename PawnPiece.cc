@@ -6,14 +6,16 @@ PawnPiece::PawnPiece(ChessBoard &board, Color color, int row, int column) : Ches
 
 PawnPiece::~PawnPiece() { }
 
+Type PawnPiece::getType() {return type;}
+
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     //variable definitions
-    Color color = getColor();
-    int row = getRow();
-    int column = getColumn();
+    Color color = this->getColor();
+    int row = this->getRow();
+    int column = this->getColumn();
     bool empty = board.getPiece(toRow,toColumn)==nullptr;
     bool samecol = toColumn==column;
-    bool adjcol = ((toColumn-column)==1) || ((toColumn-column)=-1);
+    bool adjcol = ((toColumn-column)==1) || ((toColumn-column)==-1);
     int r = (color==Black) ? 1:-1; 
 
     //checking straight forward move validity
@@ -25,6 +27,6 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
 }
 
 const char *PawnPiece::toString() {
-    if (getColor() == Black) {return "\u265F"}
-    else {return "\u2659"}
+    if (this->getColor() == Black) {return "\u265F";}
+    return "\u2659";
 }
