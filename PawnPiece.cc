@@ -1,12 +1,9 @@
 #include "PawnPiece.hh"
+#include "ChessBoard.hh"
 
-using Student::ChessBoard;
+using Student::PawnPiece;
 
 PawnPiece::PawnPiece(ChessBoard &board, Color color, int row, int column) : ChessPiece(board,color,row,column) { }
-
-PawnPiece::~PawnPiece() { }
-
-Type PawnPiece::getType() {return type;}
 
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     //variable definitions
@@ -19,14 +16,14 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     int r = (color==Black) ? 1:-1; 
 
     //checking straight forward move validity
-    if (((toRow-row==2 && row==1) || (toRow-row==-2 && row=board.getNumcols()-2) || (toRow==row+r)) && samecol && empty) {return true;}
+    if (((toRow-row==2 && row==1) || (toRow-row==-2 && row==board.getNumCols()-2) || (toRow==row+r)) && samecol && empty) {return true;}
     //checking diagonal move validity
     if ((toRow==row+r) && adjcol && !empty) {return true;}
     
     return false;
 }
 
-const char *PawnPiece::toString() {
+const char* PawnPiece::toString() {
     if (this->getColor() == Black) {return "\u265F";}
     return "\u2659";
 }

@@ -1,15 +1,10 @@
 #include "BishopPiece.hh"
 
-using Student::ChessBoard;
+using Student::BishopPiece;
 
 BishopPiece::BishopPiece(ChessBoard &board, Color color, int row, int column) : ChessPiece(board,color,row,column) { }
 
-BishopPiece::~BishopPiece() { }
-
-Type BishopPiece::getType() {return type;}
-
 bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
-    Color color = this->getColor();
     int row = this->getRow();
     int column = this->getColumn();
 
@@ -19,7 +14,7 @@ bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
     return true;
 }
 
-const char *BishopPiece::toString() {
+const char* BishopPiece::toString() {
     if (this->getColor() == Black) {return "\u265D";}
     return "\u2657";
 }

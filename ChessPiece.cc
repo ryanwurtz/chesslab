@@ -1,10 +1,8 @@
 #include "ChessPiece.hh"
 
-using Student::ChessBoard;
+using Student::ChessPiece;
 
-ChessPiece::ChessPiece(ChessBoard &board, Color color, int row, int column) : board(board), color(color), row(row), column(column) { }
-
-ChessPiece::~ChessPiece() { }
+ChessPiece::ChessPiece(ChessBoard &board, Color color, int row, int column) : color(color), row(row), column(column), board(board) {}
 
 Color ChessPiece::getColor() {return color;}
 

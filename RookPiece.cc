@@ -1,15 +1,10 @@
 #include "RookPiece.hh"
 
-using Student::ChessBoard;
+using Student::RookPiece;
 
 RookPiece::RookPiece(ChessBoard &board, Color color, int row, int column) : ChessPiece(board,color,row,column) { }
 
-RookPiece::~RookPiece() { }
-
-Type RookPiece::getType() {return type;}
-
 bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
-    Color color = this->getColor();
     int row = this->getRow();
     int column = this->getColumn();
 
@@ -19,7 +14,7 @@ bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
     return true;   
 }
 
-const char *RookPiece::toString() {
+const char* RookPiece::toString() {
     if (this->getColor() == Black) {return "\u265C";}
     return "\u2656";
 

@@ -15,8 +15,8 @@ namespace Student
         Type type = Rook;
     public:
         RookPiece(ChessBoard &board, Color color, int row, int column);
-        virtual ~RookPiece();
-        virtual Type getType();
+        virtual ~RookPiece() {}
+        virtual Type getType() {return type;}
         virtual bool canMoveToLocation(int toRow, int toColumn);
         virtual const char *toString();
     };
