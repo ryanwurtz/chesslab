@@ -2,7 +2,6 @@
 #define _CHESSBOARD_H__
 
 #include "ChessPiece.hh"
-#include "KingPiece.hh"
 #include <list>
 #include <vector>
 #include <sstream>
@@ -35,6 +34,9 @@ namespace Student
          * Number of columns of the chessboard
          */
         ChessBoard(int numRow, int numCol);
+
+        //destructor I added
+        ~ChessBoard();
 
         /**
          * @return

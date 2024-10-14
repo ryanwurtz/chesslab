@@ -2,7 +2,6 @@
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
 #include "BishopPiece.hh"
-#include "KingPiece.hh"
 
 using Student::ChessBoard;
 
@@ -49,9 +48,17 @@ std::ostringstream ChessBoard::displayBoard()
 
 ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece*>(numCols,nullptr)) {}
 
+ChessBoard::~ChessBoard() {
+    for (int i=0;i<numRows;i++) {
+        for (int j=0;j<numCols;j++) {
+            delete board[i][j];
+        }
+    }
+}
+
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
     //is row or column out of bounds
-     if (startRow >= this->getNumRows() || startRow <= 0 || startColumn >= this->getNumCols() || startColumn <= 0) {return;}
+     if (startRow >= this->getNumRows() || startRow < 0 || startColumn >= this->getNumCols() || startColumn < 0) {return;}
 
     ChessBoard &boardref = *this;
     ChessPiece* piece;
@@ -64,16 +71,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
-    //checking if the move is valid
-    if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
-    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
-    
-    //moving piece and handling memory if valid
-    if (board[toRow][toColumn] != nullptr) {delete board[toRow][toColumn];}
-    ChessPiece *temp= board[fromRow][fromColumn];
-    board[toRow][toColumn] = temp;
-    board[fromRow][fromColumn] = nullptr; 
-    turn = (Black) ? White : Black;
+    //dummy part 1
     return true;
 }
 
@@ -99,7 +97,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     //is the new location different
     if (fromRow == toRow && fromColumn == toColumn) {return false;}
     //is row or column of desired move out of bounds
-    if (toRow >= this->getNumRows() || toRow <= 0 || toColumn >= this->getNumCols() || toColumn <= 0) {return false;}
+    if (toRow >= this->getNumRows() || toRow < 0 || toColumn >= this->getNumCols() || toColumn < 0) {return false;}
     //does the new location have a piece of the same color if any at all
     if (board[toRow][toColumn] != nullptr) {
         if (board[fromRow][fromColumn]->getColor()==board[toRow][toColumn]->getColor()) {return false;}

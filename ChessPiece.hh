@@ -13,8 +13,9 @@
     Color color;
     int row;
     int column;
-  public:
+  protected:
     ChessBoard &board;
+  public:
     /**
      * @brief
      * Constructor for ChessPiece.
