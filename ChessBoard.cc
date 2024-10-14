@@ -50,6 +50,9 @@ std::ostringstream ChessBoard::displayBoard()
 ChessBoard::ChessBoard(int numRow, int numCol) : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece*>(numCols,nullptr)) {}
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
+    //is row or column out of bounds
+     if (startRow >= this->getNumRows() || startRow <= 0 || startColumn >= this->getNumCols() || startColumn <= 0) {return;}
+
     ChessBoard &boardref = *this;
     ChessPiece* piece;
     if (ty==Rook) {piece = new RookPiece(boardref,col,startRow,startColumn);}   
@@ -62,14 +65,15 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
     //checking if the move is valid
-    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
     if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
-
+    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
+    
     //moving piece and handling memory if valid
-    delete board[toRow][toColumn];
+    if (board[toRow][toColumn] != nullptr) {delete board[toRow][toColumn];}
     ChessPiece *temp= board[fromRow][fromColumn];
     board[toRow][toColumn] = temp;
     board[fromRow][fromColumn] = nullptr; 
+    turn = (Black) ? White : Black;
     return true;
 }
 
@@ -90,13 +94,16 @@ bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
 }
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+    //is there a piece at the start location
+    if (this->getPiece(fromRow,fromColumn) == nullptr) {return false;}
     //is the new location different
     if (fromRow == toRow && fromColumn == toColumn) {return false;}
     //is row or column of desired move out of bounds
-    try {board.at(toRow).at(toColumn);}
-    catch (const std::out_of_range& ex) {return false;}
-    //does the new location have a piece of the same color
-    if (board[fromRow][fromColumn]->getColor()==board[toRow][toColumn]->getColor()) {return false;}
+    if (toRow >= this->getNumRows() || toRow <= 0 || toColumn >= this->getNumCols() || toColumn <= 0) {return false;}
+    //does the new location have a piece of the same color if any at all
+    if (board[toRow][toColumn] != nullptr) {
+        if (board[fromRow][fromColumn]->getColor()==board[toRow][toColumn]->getColor()) {return false;}
+    }
     //is move valid for specific piece type
     if (!board[fromRow][fromColumn]->canMoveToLocation(toRow,toColumn)) {return false;}
     //are there any obstructions

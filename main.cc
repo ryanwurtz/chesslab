@@ -2,6 +2,8 @@
 #include "Chess.h"
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
+#include <stdlib.h>
+#include <iostream>
 
 void test_part1_4x4_1()
 {
