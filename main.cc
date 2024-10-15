@@ -33,10 +33,8 @@ void test_part1_4x4_1()
 int main()
 {
     //test_part1_4x4_1();
-    Student::ChessBoard cboard(4,4);
-    cboard.createChessPiece(White,Pawn,2,1);
-    std::cout << cboard.getPiece(2,1) <<std::endl;
-    std::cout << cboard.displayBoard().str() << std::endl;
-    std::cout << cboard.isValidMove(2,1,0,1) << std::endl;
+    //Student::ChessBoard cboard(4,4);
+    //std::cout << cboard.displayBoard().str() << std::endl;
+    //std::cout << cboard.isValidMove() << std::endl;
     return EXIT_SUCCESS;
 }

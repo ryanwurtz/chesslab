@@ -83,7 +83,23 @@ bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
     int cr= fromRow+r;
     int cc= fromColumn+c; 
     //iterating through the path
-    while ((cr!=toRow) && (cc!=toColumn)) {
+    if (cr==toRow) {
+        while (cc != toColumn) {
+            if (board[cr][cc]!=nullptr) {return true;}
+            cr+=r;
+            cc+=c;
+        }
+        return false;
+    }
+    if (cc==toColumn) {
+        while (cr != toRow) {
+            if (board[cr][cc]!=nullptr) {return true;}
+            cr+=r;
+            cc+=c;
+        }
+        return false;
+    }
+    while (cr != toRow && cc != toColumn) {
         if (board[cr][cc]!=nullptr) {return true;}
         cr+=r;
         cc+=c;
