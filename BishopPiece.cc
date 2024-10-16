@@ -9,9 +9,9 @@ bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
     int column = this->getColumn();
 
     //checking if move is diagonal
-    if ((toRow-row != toColumn-column) && (toRow-row != column-toColumn)) {return false;}
+    if ((toRow-row == toColumn-column) || (toRow-row == column-toColumn)) {return true;}
     
-    return true;
+    return false;
 }
 
 const char* BishopPiece::toString() {

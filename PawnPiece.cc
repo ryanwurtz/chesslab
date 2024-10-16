@@ -16,7 +16,7 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     int r = (color==Black) ? 1:-1; 
 
     //checking straight forward move validity
-    if (((toRow-row==2 && row==1) || (toRow-row==-2 && row==board.getNumCols()-2) || (toRow==row+r)) && samecol && empty) {return true;}
+    if (((toRow-row==2 && row==1 && r==1) || (toRow-row==-2 && row==board.getNumRows()-2 && r==-1) || (toRow==row+r)) && samecol && empty) {return true;}
     //checking diagonal move validity
     if ((toRow==row+r) && adjcol && !empty) {return true;}
     
