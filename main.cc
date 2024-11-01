@@ -73,6 +73,8 @@ int main()
     underthreatscan(cboard);
     std::cout << cboard.displayBoard().str() << std::endl;
     std::cout << cboard.movePiece(3,2,3,1) << std::endl;
+    std::cout << cboard.getPiece(3,1)->getRow() << "," << cboard.getPiece(3,1)->getColumn() << std::endl;
+    std::cout << cboard.getPiece(3,2) << std::endl;
     std::cout << cboard.displayBoard().str() << std::endl;
     return EXIT_SUCCESS;
 }

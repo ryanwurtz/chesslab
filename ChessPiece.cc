@@ -11,8 +11,8 @@ int ChessPiece::getRow() {return row;}
 int ChessPiece::getColumn() {return column;}
 
 void ChessPiece::setPosition(int row,int column) {
-    row=row; 
-    column=column;
+    this->row=row; 
+    this->column=column;
 }
 
 

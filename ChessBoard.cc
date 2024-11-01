@@ -73,7 +73,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
     //turn and valid move checking
     if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
-    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
+    if (turn != this->getPiece(fromRow,fromColumn)->getColor()) {return false;}
 
     //deleting whatever is at move location
     delete this->getPiece(toRow,toColumn);
@@ -140,7 +140,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
     //checking if piece is null and setting variables
-    if (board[row][column]==nullptr) {return false;}
+    if (this->getPiece(row,column)==nullptr) {return false;}
     int rows = this->getNumRows();
     int cols = this->getNumCols();
 
