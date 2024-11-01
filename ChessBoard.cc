@@ -71,7 +71,19 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
-    //dummy part 1
+    //turn and valid move checking
+    if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
+    if (turn != board[fromRow][fromColumn]->getColor()) {return false;}
+
+    //deleting whatever is at move location
+    delete this->getPiece(toRow,toColumn);
+    //move piece 
+    ChessPiece* temp= this->getPiece(fromRow,fromColumn);
+    temp->setPosition(toRow,toColumn);
+    board[toRow][toColumn] = temp;
+    board[fromRow][fromColumn] = nullptr;
+    //switching turn
+    turn = (turn==White) ? Black : White;
     return true;
 }
 
@@ -127,7 +139,17 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
-    //dummy part 1
-    return true;
+    //checking if piece is null and setting variables
+    if (board[row][column]==nullptr) {return false;}
+    int rows = this->getNumRows();
+    int cols = this->getNumCols();
+
+    //scanning for any pieces that can capture the current piece
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            if (this->isValidMove(i,j,row,column)) {return true;}
+        }
+    }
+    return false;
 }
 

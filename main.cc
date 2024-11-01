@@ -38,9 +38,6 @@ void isValidScan(Student::ChessBoard &cboard)
         {
             if(cboard.getPiece(i,j) != nullptr)
             {   
-                if (==Rook) {std::cout << "Rook\n" << std::endl;}  
-                else if (ty==Bishop) {std::cout << "Bishop\n" << std::endl;}
-                else if (ty==Pawn) {std::cout << "Pawn\n" << std::endl;}
                 for(int k = 0; k < cboard.getNumRows(); k++)
                 {
                     for(int l = 0; l < cboard.getNumCols(); l++)
@@ -56,21 +53,27 @@ void isValidScan(Student::ChessBoard &cboard)
     }
 }
 
+void underthreatscan(Student::ChessBoard &cboard) {
+    for(int i = 0; i < cboard.getNumRows(); i++) {
+        for(int j = 0; j < cboard.getNumCols(); j++) {
+            if (cboard.isPieceUnderThreat(i,j)) {std::cout << "Piece is under threat: " << i <<","<< j << std::endl;}
+        }
+    }
+}
 
 int main()
 {
     //test_part1_4x4_1();
-    Student::ChessBoard cboard(8,8);
-    cboard.createChessPiece(Black,Pawn,2,2);
-    cboard.createChessPiece(Black,Rook,3,2);
-    cboard.createChessPiece(White,Pawn,3,1);
-    cboard.createChessPiece(Black,Pawn,5,4);
-    cboard.createChessPiece(Black,Rook,5,0);
-    cboard.createChessPiece(Black,Pawn,1,1);
-    cboard.createChessPiece(White,Rook,0,1);
-    cboard.createChessPiece(White,Pawn,1,3);
-    std::cout << cboard.displayBoard().str() << std::endl;
+    Student::ChessBoard cboard(4,4);
+    cboard.createChessPiece(White,Rook,3,2);
+    cboard.createChessPiece(Black,Bishop,1,3);
+    cboard.createChessPiece(Black,Rook,1,1);
+    cboard.createChessPiece(White,Rook,2,3);
     isValidScan(cboard);
+    underthreatscan(cboard);
+    std::cout << cboard.displayBoard().str() << std::endl;
+    std::cout << cboard.movePiece(3,2,3,1) << std::endl;
+    std::cout << cboard.displayBoard().str() << std::endl;
     return EXIT_SUCCESS;
 }
 
