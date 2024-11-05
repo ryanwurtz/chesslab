@@ -11,6 +11,15 @@ namespace Student
 {
     class KingPiece : public ChessPiece
     {
+    private:
+        Type type = King;
+        int row;
+        int column;
+    public:
+        KingPiece(ChessBoard& board, Color color, int row, int column);
+        virtual Type getType() {return type;}
+        virtual bool canMoveToLocation(int toRow, int toColumn);
+        const char* toString();
     };
 }
 
