@@ -38,6 +38,7 @@ void isValidScan(Student::ChessBoard &cboard)
         {
             if(cboard.getPiece(i,j) != nullptr)
             {   
+                
                 for(int k = 0; k < cboard.getNumRows(); k++)
                 {
                     for(int l = 0; l < cboard.getNumCols(); l++)
@@ -48,12 +49,14 @@ void isValidScan(Student::ChessBoard &cboard)
                         }
                     }
                 }
+                std::cout << std::endl;
             }
         }
     }
+    
 }
 
-void underthreatscan(Student::ChessBoard &cboard) {
+void underThreatScan(Student::ChessBoard &cboard) {
     for(int i = 0; i < cboard.getNumRows(); i++) {
         for(int j = 0; j < cboard.getNumCols(); j++) {
             if (cboard.isPieceUnderThreat(i,j)) {std::cout << "Piece is under threat: " << i <<","<< j << std::endl;}
@@ -66,16 +69,228 @@ int main()
     //test_part1_4x4_1();
     Student::ChessBoard cboard(4,4);
     cboard.createChessPiece(White,Rook,3,2);
-    cboard.createChessPiece(Black,Bishop,1,3);
-    cboard.createChessPiece(Black,Rook,1,1);
-    cboard.createChessPiece(White,Rook,2,3);
-    isValidScan(cboard);
-    underthreatscan(cboard);
+    cboard.createChessPiece(White,Queen,3,1);
+    cboard.createChessPiece(Black,Knight,3,2);
+    // Starting sequence
+    // isValidScan(cboard);
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(3, 0, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 3, 1, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 1, 0, 1);
+    // isValidScan(cboard);
     std::cout << cboard.displayBoard().str() << std::endl;
-    std::cout << cboard.movePiece(3,2,3,1) << std::endl;
-    std::cout << cboard.getPiece(3,1)->getRow() << "," << cboard.getPiece(3,1)->getColumn() << std::endl;
-    std::cout << cboard.getPiece(3,2) << std::endl;
-    std::cout << cboard.displayBoard().str() << std::endl;
+    // cboard.movePiece(1, 2, 0, 3);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 0, 3, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 2, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 2, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 1, 0, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 3, 2);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(1, 3, 1, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 0, 1, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 3, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 0, 1, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 0, 3, 3);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(3, 2, 3, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 1, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 1, 3, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 0, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 2, 3);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(3, 2, 2, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 3, 1, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 0, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 3, 1, 0);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 0, 3, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 0, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 2, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 3, 1, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 1, 1, 2);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(0, 2, 0, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 1, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 2, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 2, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 0, 0, 0);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(3, 1, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 1, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 0, 3, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 2, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 1, 1);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 1, 2, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 0, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 3, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 1, 1, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 2, 0, 0);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 0, 2, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 2, 1, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 2, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 2, 2, 2);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 0, 2, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 0, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 0, 2, 0);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 3, 0, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(3, 0, 2, 2);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(2, 1, 1, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 2, 0, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 1, 0, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(0, 3, 1, 3);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 0, 3, 3);
+    // isValidScan(cboard);
+
+    // underThreatScan(cboard);
+
+    // cboard.movePiece(0, 1, 2, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 3, 1, 2);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(2, 1, 1, 1);
+    // isValidScan(cboard);
+
+    // cboard.movePiece(1, 2, 0, 2);
+    // isValidScan(cboard);
+
     return EXIT_SUCCESS;
 }
 

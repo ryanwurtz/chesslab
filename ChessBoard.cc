@@ -2,6 +2,9 @@
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
 #include "BishopPiece.hh"
+#include "KingPiece.hh"
+#include "QueenPiece.hh"
+#include "KnightPiece.hh"
 
 using Student::ChessBoard;
 
@@ -65,7 +68,9 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
     if (ty==Rook) {piece = new RookPiece(boardref,col,startRow,startColumn);}   
     else if (ty==Bishop) {piece = new BishopPiece(boardref,col,startRow,startColumn);}
     else if (ty==Pawn) {piece = new PawnPiece(boardref,col,startRow,startColumn);}
-    //add king in later
+    else if (ty==King) {piece = new KingPiece(boardref,col,startRow,startColumn);}
+    else if (ty==Queen) {piece = new QueenPiece(boardref,col,startRow,startColumn);}
+    else if (ty==Knight) {piece = new KnightPiece(boardref,col,startRow,startColumn);}
     if (board[startRow][startColumn] != nullptr) {delete board[startRow][startColumn];}
     board[startRow][startColumn] = piece;
 }
@@ -73,8 +78,10 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
     //turn and valid move checking
     if (!this->isValidMove(fromRow,fromColumn,toRow,toColumn)) {return false;}
+    //checking turn validity
     if (turn != this->getPiece(fromRow,fromColumn)->getColor()) {return false;}
-
+    
+    
     //deleting whatever is at move location
     delete this->getPiece(toRow,toColumn);
     //move piece 
@@ -84,6 +91,12 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     board[fromRow][fromColumn] = nullptr;
     //switching turn
     turn = (turn==White) ? Black : White;
+
+    //pawn promotion
+    if (board[toRow][toColumn]->getType()==Pawn && 
+    ((toRow==0 && board[toRow][toColumn]->getColor()==White) || (toRow==this->getNumRows()-1 && board[toRow][toColumn]->getColor()==Black)))
+    {this->createChessPiece(board[toRow][toColumn]->getColor(),Queen,toRow,toColumn);}
+    
     return true;
 }
 
@@ -120,6 +133,31 @@ bool ChessBoard::obstructed(int fromRow,int fromColumn,int toRow,int toColumn) {
 }
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+    //calling helper function to determine move validity 
+    if(!validChecker(fromRow, fromColumn, toRow, toColumn)) {return false;}
+    //king check status)
+    int rows = this->getNumRows();
+    int cols = this->getNumCols();
+    ChessPiece* temp= this->getPiece(fromRow,fromColumn);
+    ChessPiece* temp2= this->getPiece(toRow,toColumn);
+    ChessPiece* k;
+    temp->setPosition(toRow,toColumn);
+    board[toRow][toColumn] = temp;
+    board[fromRow][fromColumn] = nullptr;
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            if (board[i][j]->getColor()==temp->getColor() && board[i][j]->getType()==temp->getType()) {k=board[i][j];}
+        }
+    }
+    bool check = isPieceUnderThreat(k->getRow(),k->getColumn());
+    board[fromRow][fromColumn] = temp;
+    board[fromRow][fromColumn]->setPosition(fromRow,fromColumn);
+    board[toRow][toColumn] = temp2;
+
+    return !check;
+}
+
+bool ChessBoard::validChecker(int fromRow, int fromColumn, int toRow, int toColumn) {   
     //is there a piece at the start location
     if (this->getPiece(fromRow,fromColumn) == nullptr) {return false;}
     //is the new location different
@@ -133,9 +171,9 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     //is move valid for specific piece type
     if (!board[fromRow][fromColumn]->canMoveToLocation(toRow,toColumn)) {return false;}
     //are there any obstructions
-    if (this->obstructed(fromRow,fromColumn,toRow,toColumn)) {return false;}
-
+    if (board[fromRow][fromColumn]->getType()!=Knight && this->obstructed(fromRow,fromColumn,toRow,toColumn)) {return false;}
     return true;
+    
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
@@ -147,7 +185,7 @@ bool ChessBoard::isPieceUnderThreat(int row, int column) {
     //scanning for any pieces that can capture the current piece
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
-            if (this->isValidMove(i,j,row,column)) {return true;}
+            if (this->validChecker(i,j,row,column)) {return true;}
         }
     }
     return false;

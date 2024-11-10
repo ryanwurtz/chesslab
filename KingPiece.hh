@@ -13,8 +13,6 @@ namespace Student
     {
     private:
         Type type = King;
-        int row;
-        int column;
     public:
         KingPiece(ChessBoard& board, Color color, int row, int column);
         virtual Type getType() {return type;}

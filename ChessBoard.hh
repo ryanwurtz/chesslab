@@ -109,6 +109,12 @@ namespace Student
 
         //helper function for isValidMove
         bool obstructed(int fromRow,int fromColumn,int toRow,int toColumn);
+        
+        //helper function for isValidMove
+        bool isCheck(int fromrow, int fromcolumn, int torow, int tocolumn);
+
+        //helper function for isValidMove
+        bool validChecker(int fromRow, int fromColumn, int toRow, int toColumn);
 
         /**
          * @brief

@@ -5,7 +5,9 @@ using Student::KingPiece;
 KingPiece::KingPiece(ChessBoard& board, Color color, int row, int column) : ChessPiece(board,color,row,column) { }
 
 bool KingPiece::canMoveToLocation(int toRow, int toColumn) {
-    if ((toRow-row==-1 || toRow-row==0 || toRow-row==1)&&(toColumn-column==-1 || toColumn-column==0 || toColumn-column==1)) {return true;}
+    int row = this->getRow();
+    int col = this->getColumn();
+    if ((toRow-row==-1 || toRow-row==0 || toRow-row==1)&&(toColumn-col==-1 || toColumn-col==0 || toColumn-col==1)) {return true;}
     return false;
 }
 
